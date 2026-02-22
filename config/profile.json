@@ -1,0 +1,109 @@
+{
+  "owner": {
+    "name": "Alfred",
+    "business_type": "SDVOSB",
+    "expertise": [
+      "artificial intelligence",
+      "machine learning",
+      "software development",
+      "data analytics",
+      "cloud computing",
+      "applied mathematics"
+    ],
+    "military_branch": "Air Force Reserve",
+    "education": "PhD Applied Mathematics",
+    "target_contract_size_min": 100000,
+    "target_contract_size_max": 5000000,
+    "team_size": "1-2"
+  },
+  "search": {
+    "keywords": [
+      "artificial intelligence",
+      "machine learning",
+      "data analytics",
+      "software development",
+      "cloud computing",
+      "AI ML",
+      "deep learning",
+      "natural language processing",
+      "computer vision",
+      "data science"
+    ],
+    "naics_codes": [
+      "541511",
+      "541512",
+      "541513",
+      "541519",
+      "541715",
+      "518210",
+      "541330",
+      "541690",
+      "611420"
+    ],
+    "psc_codes": [
+      "D301",
+      "D302",
+      "D306",
+      "D307",
+      "D308",
+      "D310",
+      "D311",
+      "D399",
+      "R425",
+      "R408",
+      "AC11",
+      "7030"
+    ],
+    "preferred_agencies": [
+      "DEPT OF THE AIR FORCE",
+      "DEPT OF THE SPACE FORCE",
+      "DEFENSE ADVANCED RESEARCH PROJECTS AGENCY",
+      "CHIEF DIGITAL AND ARTIFICIAL INTELLIGENCE OFFICE",
+      "DEPT OF THE ARMY",
+      "DEPT OF THE NAVY",
+      "NATIONAL AERONAUTICS AND SPACE ADMINISTRATION"
+    ],
+    "preferred_set_asides": [
+      "SDVOSB",
+      "SBA",
+      "8(a)",
+      "HUBZone",
+      "Total Small Business"
+    ],
+    "notice_types": [
+      "Solicitation",
+      "Sources Sought",
+      "Combined Synopsis/Solicitation",
+      "Special Notice",
+      "Presolicitation"
+    ],
+    "exclude_keywords": [
+      "construction",
+      "janitorial",
+      "food service",
+      "medical supplies",
+      "furniture"
+    ]
+  },
+  "scoring": {
+    "weights": {
+      "technical_fit": 0.30,
+      "agency_preference": 0.15,
+      "set_aside_match": 0.15,
+      "contract_size_fit": 0.10,
+      "deadline_feasibility": 0.10,
+      "notice_type_preference": 0.10,
+      "naics_match": 0.10
+    },
+    "thresholds": {
+      "recommend": 70,
+      "consider": 50,
+      "skip": 0
+    }
+  },
+  "recommendations": {
+    "max_per_day": 3,
+    "cooldown_days": 14,
+    "require_new_or_updated": true
+  }
+}

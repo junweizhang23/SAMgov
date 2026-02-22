@@ -1,0 +1,222 @@
+{
+  "generated_at": "2026-02-22T20:17:55.355988+00:00",
+  "summary": {
+    "total_opportunities": 7,
+    "active": 7,
+    "recommended": 0,
+    "proposals": {
+      "not_started": 7,
+      "in_progress": 0,
+      "submitted": 0,
+      "won": 0,
+      "lost": 0
+    },
+    "score_distribution": {
+      "90-100": 0,
+      "70-89": 2,
+      "50-69": 5,
+      "0-49": 0
+    },
+    "scan_count": 1
+  },
+  "agency_analysis": {
+    "top_by_volume": [
+      {
+        "agency": "DEPT OF THE AIR FORCE",
+        "count": 4
+      },
+      {
+        "agency": "DEPT OF THE ARMY",
+        "count": 2
+      },
+      {
+        "agency": "DEFENSE ADVANCED RESEARCH PROJECTS AGENCY",
+        "count": 1
+      }
+    ],
+    "top_by_avg_score": [
+      {
+        "agency": "DEPT OF THE AIR FORCE",
+        "avg_score": 66.0
+      },
+      {
+        "agency": "DEPT OF THE ARMY",
+        "avg_score": 62.0
+      }
+    ],
+    "total_agencies": 3
+  },
+  "naics_analysis": {
+    "top_naics": [
+      {
+        "code": "541715",
+        "label": "R&D Physical/Engineering Sciences",
+        "count": 3,
+        "avg_score": 66.0
+      },
+      {
+        "code": "541512",
+        "label": "Computer Systems Design",
+        "count": 1,
+        "avg_score": 66.0
+      }
+    ],
+    "total_unique_codes": 2
+  },
+  "notice_type_analysis": {
+    "distribution": [
+      {
+        "type": "Solicitation",
+        "count": 3
+      },
+      {
+        "type": "Sources Sought",
+        "count": 2
+      },
+      {
+        "type": "Special Notice",
+        "count": 1
+      },
+      {
+        "type": "Presolicitation",
+        "count": 1
+      }
+    ]
+  },
+  "set_aside_analysis": {
+    "distribution": [
+      {
+        "set_aside": "None",
+        "count": 7
+      }
+    ],
+    "sdvosb_count": 0,
+    "small_business_count": 0
+  },
+  "timeline_analysis": {
+    "weekly_posting_volume": [
+      {
+        "week": "2024-W39",
+        "count": 1
+      },
+      {
+        "week": "2026-W04",
+        "count": 1
+      },
+      {
+        "week": "2026-W05",
+        "count": 1
+      },
+      {
+        "week": "2026-W06",
+        "count": 3
+      },
+      {
+        "week": "2026-W07",
+        "count": 1
+      }
+    ],
+    "deadline_distribution": {
+      "expired": 0,
+      "this_week": 2,
+      "next_2_weeks": 1,
+      "next_month": 1,
+      "beyond": 1,
+      "unknown": 2
+    }
+  },
+  "score_analysis": {
+    "avg_score": 65.7,
+    "median_score": 68,
+    "min_score": 54,
+    "max_score": 72,
+    "above_70": 2,
+    "above_50": 7,
+    "total": 7
+  },
+  "pipeline_health": {
+    "total_tracked": 7,
+    "active_opportunities": 7,
+    "recommended_total": 0,
+    "proposals": {
+      "not_started": 7,
+      "in_progress": 0,
+      "submitted": 0,
+      "won": 0,
+      "lost": 0
+    },
+    "conversion_rate": 0.0
+  },
+  "top_opportunities": [
+    {
+      "notice_id": "DARPA-PA-25-07-02",
+      "title": "Compositional Learning-And-Reasoning for AI Complex Systems Engineering (CLARA)",
+      "agency": "DEFENSE ADVANCED RESEARCH PROJECTS AGENCY (DARPA)",
+      "fit_score": 72,
+      "response_date": "2026-04-10T16:00:00Z",
+      "set_aside": "None",
+      "naics_code": "",
+      "proposal_status": "not_started"
+    },
+    {
+      "notice_id": "CDAO_26-01",
+      "title": "Call for Solution - AI-Enabled Software Development Coding Capabilities",
+      "agency": "CHIEF DIGITAL AND ARTIFICIAL INTELLIGENCE OFFICE",
+      "fit_score": 70,
+      "response_date": "2026-03-06",
+      "set_aside": "",
+      "naics_code": "",
+      "proposal_status": "not_started"
+    },
+    {
+      "notice_id": "FA8688-RFI-26-0001",
+      "title": "Current and Emerging Artificial Intelligence (AI) Tools to Accelerate Air Force Mobility Aircraft Ac",
+      "agency": "DEPT OF THE AIR FORCE",
+      "fit_score": 68,
+      "response_date": "2026-03-14",
+      "set_aside": "None",
+      "naics_code": "541715",
+      "proposal_status": "not_started"
+    },
+    {
+      "notice_id": "FA461026DTO01",
+      "title": "Artificial Intelligence / Machine Learning - Industry Day (Virtual Only)",
+      "agency": "SPACE SYSTEMS COMMAND",
+      "fit_score": 68,
+      "response_date": "2026-02-24T15:00:00",
+      "set_aside": "None",
+      "naics_code": "541715",
+      "proposal_status": "not_started"
+    },
+    {
+      "notice_id": "FA8730-FALCONER-NG",
+      "title": "Kessel Run - Next-Generation Air Operations Center (AOC) Weapon System (FALCONER-NG)",
+      "agency": "DEPT OF THE AIR FORCE",
+      "fit_score": 66,
+      "response_date": "",
+      "set_aside": "None",
+      "naics_code": "541512",
+      "proposal_status": "not_started"
+    },
+    {
+      "notice_id": "FA875024S7002",
+      "title": "NETWORKING THE FIGHT - AFRL Rome BAA",
+      "agency": "DEPT OF THE AIR FORCE",
+      "fit_score": 62,
+      "response_date": "",
+      "set_aside": "None",
+      "naics_code": "541715",
+      "proposal_status": "not_started"
+    },
+    {
+      "notice_id": "ASA(ALT)_26-01",
+      "title": "Call for Solution - Acquisition Data Nexus (ADN) Initiative",
+      "agency": "DEPT OF THE ARMY",
+      "fit_score": 54,
+      "response_date": "2026-02-27T13:00:00",
+      "set_aside": "",
+      "naics_code": "",
+      "proposal_status": "not_started"
+    }
+  ]
+}
