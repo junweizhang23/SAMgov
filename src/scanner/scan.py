@@ -15,7 +15,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
+import time
+
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 from bs4 import BeautifulSoup
 
 # Add project root to path
@@ -24,6 +28,15 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.storage.db import OpportunityDB
 from src.scanner.scoring import score_opportunity
+
+# Foundation integration for cross-agent memory
+try:
+    from foundation_bridge import get_memory_store
+    _memory = get_memory_store()
+    HAS_MEMORY = True
+except (ImportError, Exception):
+    _memory = None
+    HAS_MEMORY = False
 
 
 # ---------------------------------------------------------------------------
@@ -85,14 +98,34 @@ def build_api_search_params(keyword: str, page: int = 0, size: int = 25) -> dict
     }
 
 
+def _get_session_with_retry() -> requests.Session:
+    """Create a requests session with retry and exponential backoff."""
+    session = requests.Session()
+    retry = Retry(
+        total=3,
+        backoff_factor=1.0,  # 1s, 2s, 4s
+        status_forcelist=[429, 500, 502, 503, 504],
+        allowed_methods=["GET"],
+    )
+    adapter = HTTPAdapter(max_retries=retry)
+    session.mount("https://", adapter)
+    session.mount("http://", adapter)
+    return session
+
+
+# Shared session for connection pooling
+_http_session = _get_session_with_retry()
+
+
 def search_sam_api(keyword: str, page: int = 0, size: int = 25) -> list[dict]:
     """
     Search SAM.gov using the internal API endpoint.
     Returns a list of raw opportunity dicts from the API response.
+    Includes retry logic with exponential backoff.
     """
     params = build_api_search_params(keyword, page, size)
     try:
-        resp = requests.get(SAM_API_SEARCH, params=params, headers=HEADERS, timeout=30)
+        resp = _http_session.get(SAM_API_SEARCH, params=params, headers=HEADERS, timeout=30)
         if resp.status_code == 200:
             data = resp.json()
             # The API nests results under _embedded.results or similar
@@ -103,6 +136,9 @@ def search_sam_api(keyword: str, page: int = 0, size: int = 25) -> list[dict]:
                 if not results:
                     results = data.get("results", [])
                 return results
+        elif resp.status_code == 429:
+            print(f"  [WARN] Rate limited by SAM.gov. Waiting 30s...")
+            time.sleep(30)
         return []
     except Exception as e:
         print(f"  [WARN] API search failed for '{keyword}': {e}")
@@ -110,10 +146,10 @@ def search_sam_api(keyword: str, page: int = 0, size: int = 25) -> list[dict]:
 
 
 def fetch_opportunity_detail_api(opp_id: str) -> Optional[dict]:
-    """Fetch full opportunity details from SAM.gov API."""
+    """Fetch full opportunity details from SAM.gov API with retry."""
     try:
         url = f"{SAM_API_OPP}{opp_id}"
-        resp = requests.get(url, headers=HEADERS, timeout=30)
+        resp = _http_session.get(url, headers=HEADERS, timeout=30)
         if resp.status_code == 200:
             return resp.json()
     except Exception as e:
@@ -343,6 +379,33 @@ def run_scan_and_save(verbose: bool = True) -> dict:
     if verbose:
         print(f"\n  Recommendations saved to: {rec_file}")
         print(f"  Scan complete.")
+
+    # Log to cross-agent memory store
+    if HAS_MEMORY and _memory:
+        try:
+            _memory.log_interaction(
+                "wealth-agent", "alfred",
+                f"SAM.gov scan completed: {len(recommendations)} recommendations",
+                {
+                    "scan_date": today,
+                    "total_recommendations": len(recommendations),
+                    "top_opportunities": [
+                        {"notice_id": r["notice_id"], "title": r["title"][:80], "score": r["fit_score"]}
+                        for r in recommendations[:3]
+                    ],
+                },
+            )
+            for r in recommendations:
+                if r["fit_score"] >= 85:
+                    _memory.log_decision(
+                        "alfred", "wealth-agent",
+                        f"High-score opportunity found: {r['notice_id']}",
+                        f"Score {r['fit_score']}/100. {r['fit_rationale']}",
+                        confidence=r['fit_score'] / 100.0,
+                        tags=["samgov", "opportunity", r.get('agency', '')],
+                    )
+        except Exception as e:
+            print(f"  [WARN] Memory store logging failed: {e}")
 
     return summary
 

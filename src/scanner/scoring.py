@@ -13,6 +13,7 @@ Scores each opportunity based on configurable criteria:
 
 import re
 from datetime import datetime, timezone
+import time
 from typing import Tuple
 
 
@@ -200,7 +201,10 @@ def _score_deadline(opp: dict) -> int:
         else:
             return 60  # Can't parse — neutral
 
-        now = datetime.now()
+        now = datetime.now(timezone.utc)
+        # Make deadline timezone-aware if it isn't
+        if deadline.tzinfo is None:
+            deadline = deadline.replace(tzinfo=timezone.utc)
         days_left = (deadline - now).days
 
         if days_left < 0:

@@ -177,7 +177,7 @@ def _format_opportunity_context(opp: dict) -> str:
 def _generate_todo_list(opp: dict) -> list[dict]:
     """Generate a structured TODO list based on opportunity details."""
     response_date = opp.get("response_date", "")
-    now = datetime.now()
+    now = datetime.now(timezone.utc)
 
     # Calculate days until deadline
     days_left = 30  # default
@@ -185,6 +185,8 @@ def _generate_todo_list(opp: dict) -> list[dict]:
         for fmt in ["%Y-%m-%dT%H:%M:%S", "%Y-%m-%d", "%b %d, %Y"]:
             try:
                 deadline = datetime.strptime(response_date[:19], fmt)
+                if deadline.tzinfo is None:
+                    deadline = deadline.replace(tzinfo=timezone.utc)
                 days_left = max(1, (deadline - now).days)
                 break
             except ValueError:
@@ -365,7 +367,7 @@ cutting-edge AI research and practical government applications.
 
 ---
 
-*Generated: {datetime.now().strftime('%Y-%m-%d %H:%M')}*
+*Generated: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}*
 """
 
     return {
