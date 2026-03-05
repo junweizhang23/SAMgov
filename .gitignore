@@ -1,34 +1,28 @@
 # Python
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
+*.pyc
+*.pyo
 *.egg-info/
 dist/
 build/
-.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+coverage.xml
 
-# Virtual environments
-venv/
-.venv/
-env/
+# Environment
+.env
+.env.local
+.env.production
+
+# Runtime data
+data/
+logs/
+output/
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Large raw scan data (regenerated daily)
-data/raw/
-
-# Environment variables
-.env
-.env.local
-
-# Logs
-*.log

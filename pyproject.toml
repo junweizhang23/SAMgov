@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "samgov"
+version = "0.1.0"
+description = "SAM.gov government contract monitor — opportunity screening and analysis"
+readme = "README.md"
+license = "LicenseRef-Proprietary"
+requires-python = ">=3.10"
+authors = [
+    { name = "Alfred Zhang", email = "junweizhang23@gmail.com" },
+]
+
+dependencies = [
+    "requests>=2.28.0",
+    "beautifulsoup4>=4.12.0",
+    "openai>=1.0.0",
+    "pandas>=2.0.0",
+    "matplotlib>=3.7.0",
+    "seaborn>=0.12.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.3.0",
+]
+
+[project.urls]
+Repository = "https://github.com/junweizhang23/SAMgov"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-v --tb=short"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "UP", "B", "S", "SIM"]
+ignore = ["S101", "S105"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101", "S105", "S106"]
